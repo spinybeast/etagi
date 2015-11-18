@@ -17,7 +17,8 @@ class ConsultForm extends Model
     public function rules()
     {
         return [
-            [['name', 'phone'], 'required'],
+            [['name', 'phone'], 'required', 'message' => 'Введите {attribute}'],
+            [['phone'], 'integer', 'message' => 'Телефон должен состоять из цифр'],
         ];
     }
 
@@ -39,14 +40,13 @@ class ConsultForm extends Model
     public function send()
     {
         if ($this->validate()) {
-            Yii::$app->mailer->compose()
+            $mail = Yii::$app->mailer->compose()
                 ->setTo(Yii::$app->params['adminEmail'])
                 ->setFrom([Yii::$app->params['adminEmail'] => $this->name])
                 ->setSubject('Заявка на консультацию')
                 ->setTextBody('Телефон: ' . $this->phone . ', Имя: ' . $this->name)
-                ->send();
-
-            return true;
+                ;
+            return $mail->send();
         }
         return false;
     }

@@ -6,6 +6,7 @@ use app\models\ConsultForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
@@ -50,7 +51,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index', ['model' => new ConsultForm()]);
+        $model = new ConsultForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->send()) {
+            Yii::$app->session->setFlash('consultFormSubmitted');
+
+            return $this->refresh();
+        }
+        return $this->render('index', ['model' => $model]);
     }
 
     public function actionLogin()

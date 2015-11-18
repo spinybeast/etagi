@@ -1,6 +1,7 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 
 $this->title = 'Этажи недвижимость';
@@ -15,28 +16,30 @@ $this->title = 'Этажи недвижимость';
 <section class="main_form container">
 
     <div class="main_form_title">Отправьте заявку для получения<br> бесплатной консультации</div>
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-    ]); ?>
+    <?php if (Yii::$app->session->hasFlash('consultFormSubmitted')): ?>
+        <p>Спасибо за Ваше обращение! Мы обязательно Вам перезвоним.</p>
+    <?php else: ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'consult-form',
+            'fieldConfig' => [
+                'template' => "{label}\n{input}\n{error}",
+            ],
+        ]); ?>
 
-    <div class="main_form_name">
-        <?= Html::activeLabel($model, 'name') ?>
-        <?= Html::activeTextInput($model, 'name', ['placeholder' => 'Иванов Иван']); ?>
-        <?= Html::error($model, 'name') ?>
-    </div>
-    <div class="main_form_phone">
-        <?= Html::activeLabel($model, 'phone') ?>
-        <?= Html::activeTextInput($model, 'phone', ['placeholder' => '+7 901 234-56-78']); ?>
-        <?= Html::error($model, 'phone') ?>
-    </div>
+        <div class="main_form_name">
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Иванов Иван']) ?>
+        </div>
+        <div class="main_form_phone">
+            <?= $form->field($model, 'phone')->textInput(['placeholder' => '+7 901 234-56-78']) ?>
+        </div>
+        <div class="main_form_button">
+            <?= Html::submitButton('Отправить', ['name' => 'consult-button']) ?>
+        </div>
 
-    <div class="main_form_button">
-        <?= Html::submitButton('Отправить', ['name' => 'consult-button']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
-    <div class="main_form_garant">Гарантируем<br> конфиденциальность</div>
+        <?php ActiveForm::end(); ?>
+        <div class="main_form_garant">Гарантируем<br> конфиденциальность</div>
+    <?php endif; ?>
 </section>
 <section class="basic_services">
     <div class="basic_services_bg"></div>
@@ -128,19 +131,20 @@ $this->title = 'Этажи недвижимость';
 <section class="contacts">
     <div class="container">
         <p class="contacts_title">Контакты</p>
-<div>
-        <div class="col-md-4 col-xs-12 address">
-            <b>Адрес:</b>
-            Таганрог
-            <b>Телефоны:</b>
-            +79613146106<br>
-            <b>Email:</b>
-            <a href="mailto:<?= Yii::$app->params['siteEmail'] ?>"><?= Yii::$app->params['siteEmail'] ?></a>
+
+        <div>
+            <div class="col-md-4 col-xs-12 address">
+                <b>Адрес:</b>
+                Таганрог
+                <b>Телефоны:</b>
+                +79613146106<br>
+                <b>Email:</b>
+                <a href="mailto:<?= Yii::$app->params['siteEmail'] ?>"><?= Yii::$app->params['siteEmail'] ?></a>
+            </div>
+            <div class="col-md-8 col-xs-12 map">
+                <script type="text/javascript" charset="utf-8"
+                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=tusZ2XbNQQk2SjWnuAkMLJQzOCFpXpuD&width=100%&height=400&lang=ru_RU&sourceType=constructor"></script>
+            </div>
         </div>
-        <div class="col-md-8 col-xs-12 map">
-            <script type="text/javascript" charset="utf-8"
-                    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=tusZ2XbNQQk2SjWnuAkMLJQzOCFpXpuD&width=100%&height=400&lang=ru_RU&sourceType=constructor"></script>
-        </div>
-    </div>
     </div>
 </section>

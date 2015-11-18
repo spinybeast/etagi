@@ -413,7 +413,10 @@ i, em {
 
 /* main_form
 -----------------------------------------------------------------------------*/
-
+.help-block {
+    position: absolute;
+    color: rgba(78, 6, 6, 1) !important;
+}
 .main_form {
     margin: 40px auto;
     background: #5f5049;
@@ -421,7 +424,9 @@ i, em {
     position: relative;
     
 }
-
+.main_form label {
+    color: #fff !important;
+}
 .main_form:after {
     clear: both;
     display: block;
