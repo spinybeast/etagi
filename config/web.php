@@ -6,11 +6,21 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'gii' => ['class' => 'yii\gii\Module'],
+        'admin' => ['class' => 'app\modules\admin\Module'],
+    ],
     'components' => [
         'urlManager' => [
+            'showScriptName'=>false,
             'enablePrettyUrl' => true,
             'rules' => [
-                // your rules go here
+                '' => 'site/index',
+                'contact' => 'site/contact',
+                'login' => 'admin/default/login',
+                'admin' => 'admin/default/index',
+                '<controller:\w+>/<id>' => '<controller>/view',
+                '<action:\w+>' => 'site/static',
             ]
         ],
         'request' => [
@@ -22,6 +32,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+            'loginUrl' => ['admin/default/login'],
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -44,6 +55,10 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['admin'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
+        ],
     ],
     'params' => $params,
 ];
@@ -56,9 +71,6 @@ if (YII_ENV_DEV) {
     ];
 
     $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-    ];
 }
 
 return $config;

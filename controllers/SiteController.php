@@ -6,10 +6,10 @@ use app\models\ConsultForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\StaticPage;
 
 class SiteController extends Controller
 {
@@ -100,4 +100,14 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionStatic($action)
+    {
+        $page = StaticPage::findOne(['pagekey' => $action, 'enabled' => 1]);
+        $view = file_exists($this->viewPath . DIRECTORY_SEPARATOR . $action . '.php') ? $action : 'static';
+        return $this->render($view, [
+            'page' => $page
+        ]);
+    }
+
 }

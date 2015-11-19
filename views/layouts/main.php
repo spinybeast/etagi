@@ -58,10 +58,10 @@ AppAsset::register($this);
             'options' => ['class' => ''],
             'items' => [
                 ['label' => 'О нас', 'url' => ['/site/index']],
-                ['label' => 'Эксклюзивные предложения', 'url' => ['/site/about']],
-                ['label' => 'Услуги', 'url' => ['/site/contact']],
-                ['label' => 'Карьера', 'url' => ['/site/contact']],
-                ['label' => 'Контакты', 'url' => ['/site/contact']],
+                ['label' => 'Эксклюзивные предложения', 'url' => ['/exclusive']],
+                ['label' => 'Услуги', 'url' => ['/services']],
+                ['label' => 'Карьера', 'url' => ['/career']],
+                ['label' => 'Контакты', 'url' => ['/contact']],
             ],
         ]);
         NavBar::end();
