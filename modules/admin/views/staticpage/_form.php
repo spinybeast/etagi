@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use franciscomaya\sceditor\SCEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\StaticPage */
@@ -15,10 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 250]) ?>
 
-    <?php echo yii\imperavi\Widget::widget([
-        'model' => $model,
-        'attribute' => 'text',
-    ]); ?>
+    <?= $form->field($model, 'text')->widget(SCEditor::className(), []) ?>
 
     <?= $form->field($model, 'enabled')->checkbox() ?>
 
@@ -29,3 +27,7 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+<style>
+    .sceditor-container {width: 100% !important; min-height: 250px;}
+    .sceditor-container iframe, .sceditor-container textarea {width: 99% !important; min-height: 250px;}
+</style>
