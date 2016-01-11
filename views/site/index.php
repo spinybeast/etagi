@@ -10,7 +10,7 @@ $this->title = 'Этажи недвижимость';
 <section class="services">
     <div class="services_bg"></div>
     <div class="container">
-        <div class="services_info">Этажи недвижимость<br> добро пожаловать на сайт!</div>
+        <div class="services_info">Ваше новоселье - <br/>Наш профессиональный праздник!</div>
     </div>
 </section>
 <section class="main_form container">
@@ -137,7 +137,7 @@ $this->title = 'Этажи недвижимость';
                 <b>Адрес:</b>
                 Таганрог
                 <b>Телефоны:</b>
-                +79613146106<br>
+                <?= Yii::$app->params['sitePhone'] ?><br>
                 <b>Email:</b>
                 <a href="mailto:<?= Yii::$app->params['siteEmail'] ?>"><?= Yii::$app->params['siteEmail'] ?></a>
             </div>

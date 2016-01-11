@@ -3,5 +3,6 @@
 return [
     'siteName' => 'Этажи недвижимость',
     'siteEmail' => 'etagi-t@mail.ru',
-    'adminEmail' => 'spiny.beast@gmail.com',
+    'sitePhone' => '8-988-944-50-50',
+    'adminEmail' => 'etagi-t@mail.ru',
 ];

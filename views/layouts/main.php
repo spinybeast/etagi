@@ -34,10 +34,10 @@ AppAsset::register($this);
             </a>
 
             <div class="header_info col-xs-6 col-md-3 vertical-center text-center">
-                <span>Агентство недвижимости</span>
+                <span>Риэлторская компания</span>
             </div>
             <div class="header_phone col-xs-6 col-md-3 vertical-center text-center">
-                <p>+7 495 342 34 32</p>
+                <p><?= Yii::$app->params['sitePhone'] ?></p>
             </div>
             <div class="header_email col-xs-6 col-md-3 vertical-center text-center">
                 <p>Email:</p>
@@ -57,7 +57,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => ''],
             'items' => [
-                ['label' => 'О нас', 'url' => ['/site/index']],
+                ['label' => 'Главная', 'url' => ['/site/index']],
                 ['label' => 'Эксклюзивные предложения', 'url' => ['/exclusive']],
                 ['label' => 'Услуги', 'url' => ['/services']],
                 ['label' => 'Карьера', 'url' => ['/career']],
