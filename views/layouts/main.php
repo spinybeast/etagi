@@ -40,6 +40,7 @@ AppAsset::register($this);
                 <p><?= Yii::$app->params['sitePhone'] ?></p>
             </div>
             <div class="header_email col-xs-6 col-md-3 vertical-center text-center">
+                <p>Адрес: <?= Yii::$app->params['siteAddress'] ?></p>
                 <p>Email:</p>
 
                 <div>

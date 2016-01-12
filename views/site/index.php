@@ -135,15 +135,14 @@ $this->title = 'Этажи недвижимость';
         <div>
             <div class="col-md-4 col-xs-12 address">
                 <b>Адрес:</b>
-                Таганрог
+                <?= Yii::$app->params['siteAddress'] ?><br>
                 <b>Телефоны:</b>
                 <?= Yii::$app->params['sitePhone'] ?><br>
                 <b>Email:</b>
                 <a href="mailto:<?= Yii::$app->params['siteEmail'] ?>"><?= Yii::$app->params['siteEmail'] ?></a>
             </div>
             <div class="col-md-8 col-xs-12 map">
-                <script type="text/javascript" charset="utf-8"
-                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=tusZ2XbNQQk2SjWnuAkMLJQzOCFpXpuD&width=100%&height=400&lang=ru_RU&sourceType=constructor"></script>
+                <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=14GcH8O8bq4425sxxLXGuGM8jQpUTsv4&width=100%&height=400&lang=ru_RU&sourceType=constructor"></script>
             </div>
         </div>
     </div>
