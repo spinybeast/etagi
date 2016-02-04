@@ -13,6 +13,7 @@ use Yii;
  * @property string $agent
  * @property string $phone
  * @property string $lot_number
+ * @property integer $price
  */
 class Exclusives extends \yii\db\ActiveRecord
 {
@@ -32,6 +33,7 @@ class Exclusives extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description'], 'string'],
+            [['price'], 'integer'],
             [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200]
         ];
     }
@@ -43,11 +45,12 @@ class Exclusives extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'agent' => 'Agent',
-            'phone' => 'Phone',
-            'lot_number' => 'Lot Number',
+            'title' => 'Название',
+            'price' => 'Цена',
+            'description' => 'Описание',
+            'agent' => 'Агент',
+            'phone' => 'Телефон',
+            'lot_number' => 'Номер лота',
         ];
     }
 

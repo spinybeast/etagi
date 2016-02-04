@@ -18,6 +18,8 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'agent')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
