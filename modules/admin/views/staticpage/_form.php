@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use franciscomaya\sceditor\SCEditor;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\StaticPage */
@@ -16,7 +16,7 @@ use franciscomaya\sceditor\SCEditor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 250]) ?>
 
-    <?= $form->field($model, 'text')->widget(SCEditor::className(), []) ?>
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), []) ?>
 
     <?= $form->field($model, 'enabled')->checkbox() ?>
 

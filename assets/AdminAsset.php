@@ -13,4 +13,13 @@ class AdminAsset extends AppAsset
 {
     public $css = [
     ];
+    public $js = [
+        'js/admin.js'
+    ];
+    public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+        '\rmrevin\yii\fontawesome\AssetBundle',
+        'wbraganca\dynamicform\DynamicFormAsset',
+    ];
 }

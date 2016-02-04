@@ -50,4 +50,27 @@ class Exclusives extends \yii\db\ActiveRecord
             'lot_number' => 'Lot Number',
         ];
     }
+
+    public function getProperties()
+    {
+        return $this->hasMany(ExclusivesProperties::className(), ['exclusive_id' => 'id']);
+    }
+
+    public function clearProperties()
+    {
+        if (!empty($this->properties)) {
+            foreach($this->properties as $property) {
+                $property->delete();
+            }
+        }
+    }
+
+    public function getRawProperties()
+    {
+        $content = '';
+        foreach ($this->properties as $property) {
+            $content .= $property->name . ': ' . $property->value . '<br />';
+        }
+        return $content;
+    }
 }

@@ -4,6 +4,8 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Exclusives;
+use app\models\Properties;
+use app\models\ExclusivesProperties;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -63,6 +65,7 @@ class ExclusivesController extends Controller
         $model = new Exclusives();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->saveProperties($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -82,6 +85,8 @@ class ExclusivesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->clearProperties();
+            $this->saveProperties($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -116,6 +121,39 @@ class ExclusivesController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    private function saveProperties($model)
+    {
+        if ($properties = Yii::$app->request->post('ExclusivesProperties', false)) {
+            foreach ($properties as $property) {
+                if ($propertyName = Properties::find()->where(['name' => $property['name']])->one()) {
+                    if ($propertyVal = ExclusivesProperties::find()->where([
+                        'property_id' => $propertyName['id'],
+                        'exclusive_id' => $model->id
+                    ])->one()
+                    ) {
+                        $propertyVal->value = $property['value'];
+                        $propertyVal->save();
+                    } else {
+                        $propertyVal = new ExclusivesProperties();
+                        $propertyVal->exclusive_id = $model->id;
+                        $propertyVal->property_id = $propertyName->id;
+                        $propertyVal->value = $property['value'];
+                        $propertyVal->save();
+                    }
+                } else {
+                    $propertyName = new Properties();
+                    $propertyName->name = $property['name'];
+                    $propertyName->save();
+                    $propertyVal = new ExclusivesProperties();
+                    $propertyVal->exclusive_id = $model->id;
+                    $propertyVal->property_id = $propertyName->id;
+                    $propertyVal->value = $property['value'];
+                    $propertyVal->save();
+                }
+            }
         }
     }
 }

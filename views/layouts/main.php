@@ -48,7 +48,7 @@ AppAsset::register($this);
                 </div>
                 <div class="social">
                     <a href="http://vk.com/etagi_nedvigimost_taganrog" target="_blank"><?= FA::icon('vk') ?></a>
-                    <a href="http://ok.ru/profile/584427097139" target="_blank"><i class="fa fa-odnoklassniki"></i><?= FA::icon('odnoklassniki') ?></a>
+                    <a href="http://ok.ru/profile/584427097139" target="_blank"><?= FA::icon('odnoklassniki') ?></a>
                     <a href="skype:etagi-t?add"><?= FA::icon('skype') ?></a>
                 </div>
             </div>
