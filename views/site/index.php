@@ -8,10 +8,7 @@ $this->title = 'Этажи недвижимость';
 ?>
 
 <section class="services">
-    <div class="services_bg"></div>
-    <div class="container">
-        <div class="services_info">Ваше новоселье - <br/>Наш профессиональный праздник!</div>
-    </div>
+    <div class="services_bg text-center"><img src="/img/bg1.gif" class="img-responsive" style="" alt=""/></div>
 </section>
 <section class="main_form container">
 

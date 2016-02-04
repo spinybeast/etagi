@@ -6,7 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use rmrevin\yii\fontawesome\FA;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -45,6 +45,11 @@ AppAsset::register($this);
 
                 <div>
                     <a href="mailto:<?= Yii::$app->params['siteEmail'] ?>"><?= Yii::$app->params['siteEmail'] ?></a>
+                </div>
+                <div class="social">
+                    <a href="http://vk.com/etagi_nedvigimost_taganrog" target="_blank"><?= FA::icon('vk') ?></a>
+                    <a href="http://ok.ru/profile/584427097139" target="_blank"><i class="fa fa-odnoklassniki"></i><?= FA::icon('odnoklassniki') ?></a>
+                    <a href="skype:etagi-t?add"><?= FA::icon('skype') ?></a>
                 </div>
             </div>
         </div>

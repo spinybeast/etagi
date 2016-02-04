@@ -28,12 +28,15 @@ body {
     color: #c55;
     font-style: italic;
 }
+
 .navbar-toggle {
     border: 1px solid grey;
 }
+
 .navbar-toggle .icon-bar {
-     border: 1px solid grey;
- }
+    border: 1px solid grey;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;
@@ -187,7 +190,9 @@ i, em {
     float: none;
 }
 
-.navbar{margin-bottom: -2px;}
+.navbar {
+    margin-bottom: -2px;
+}
 
 .navbar .navbar-nav {
     display: inline-block;
@@ -205,8 +210,12 @@ i, em {
 }
 
 .header_top {
-    padding: 32px 0;
+    padding: 25px 0;
     font-size: 0;
+}
+
+.header_top .fa {
+    font-size: 20px;
 }
 
 .header_logo div {
@@ -254,7 +263,9 @@ i, em {
 .header_email div {
     display: inline-block;
 }
-
+.header_email .social {
+    display: block;
+}
 .header_email a {
     font-size: 15px;
     line-height: 20px;
@@ -324,23 +335,12 @@ i, em {
 }
 
 .services_bg {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-image: url(../img/bg1.jpg);
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px);
+    height: 474px;
+}
+
+.services_bg img {
+    max-height: 100%;
+    margin: 0 auto;
 }
 
 .services_bg:after {
@@ -421,16 +421,19 @@ i, em {
     position: absolute;
     color: rgba(78, 6, 6, 1) !important;
 }
+
 .main_form {
     margin: 40px auto;
     background: #8B231D;
     padding: 27px;
     position: relative;
-    
+
 }
+
 .main_form label {
     color: #fff !important;
 }
+
 .main_form:after {
     clear: both;
     display: block;
@@ -552,7 +555,7 @@ i, em {
     right: 0;
     top: 0;
     bottom: 0;
-    background:rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .basic_services_title {
@@ -769,7 +772,11 @@ i, em {
 .news_block:nth-child(even) a {
     color: #fff;
 }
-.text {padding: 20px 0;}
+
+.text {
+    padding: 20px 0;
+}
+
 /* gallery_reviews
 -----------------------------------------------------------------------------*/
 
@@ -856,13 +863,16 @@ i, em {
     font-size: 18px;
     line-height: 22px;
 }
-.contacts .map {padding: 0}
+
+.contacts .map {
+    padding: 0
+}
+
 .contacts .address {
     background: #8D2620;
     padding: 13px 27px 23px;
     height: 400px;
 }
-
 
 .contacts b {
     display: block;

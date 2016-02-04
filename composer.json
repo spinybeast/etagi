@@ -18,7 +18,7 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "rmrevin/yii2-fontawesome": "2.7.*",
+        "rmrevin/yii2-fontawesome": "~2.12",
         "franciscomaya/yii2-sceditor" : "dev-master"
     },
     "require-dev": {

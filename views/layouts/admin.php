@@ -36,6 +36,7 @@ AdminAsset::register($this);
             'encodeLabels' => false,
             'items' => [
                 ['label' => 'Страницы', 'url' => ['/admin/staticpage/index']],
+                ['label' => 'Эксклюзивы', 'url' => ['/admin/exclusives/index']],
                 ['label' => FA::icon('sign-out') . ' Выход', 'url' => ['/admin/default/logout'], 'visible' => !Yii::$app->user->isGuest],
             ],
         ]);
