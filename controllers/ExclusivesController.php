@@ -34,7 +34,7 @@ class ExclusivesController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Exclusives::findOne($id)) !== null) {
+        if (($model = Exclusives::find()->with('properties')->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('Запрошенная страница не найдена.');
