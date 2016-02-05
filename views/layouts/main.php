@@ -30,7 +30,7 @@ AppAsset::register($this);
     <header class="header">
         <div class="container header_top">
             <a href="/" class="col-xs-6 col-md-3 vertical-center text-center">
-                <div><?= Html::img('img/logo.png', array('class'=>'img-responsive')); ?></div>
+                <div><?= Html::img('/img/logo.png', array('class'=>'img-responsive')); ?></div>
             </a>
 
             <div class="header_info col-xs-6 col-md-3 vertical-center text-center">

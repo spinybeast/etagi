@@ -266,6 +266,14 @@ i, em {
 .header_email .social {
     display: block;
 }
+.header_email .social a {
+    color: #920E0E;
+    width: 25px;
+    height: 20px;
+    margin: 0 5px;
+    display: inline-block;
+    text-align: center;
+}
 .header_email a {
     font-size: 15px;
     line-height: 20px;
@@ -843,7 +851,10 @@ i, em {
 
 /* contacts
 -----------------------------------------------------------------------------*/
-
+a.btn {
+    text-decoration: none;
+    border-radius: 0;
+}
 .contacts {
     margin: 40px 0;
 }
@@ -900,6 +911,47 @@ i, em {
     text-align: center;
 }
 
+/* Exclusives */
+.exclusives .col-md-3 {
+    margin: 15px 0;
+}
+
+.exclusives-item h3.title {
+    margin: 13px 0;
+    height: 38px;
+}
+
+.exclusives-item .address {
+    height: 38px;
+    font-size: 14px;
+    color: gray;
+}
+.exclusives-item .price {
+    color: black;
+    font-size: 20px;
+}
+
+.exclusives-item h3.title a {
+    color: #920E0E;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+.exclusive .price {
+    font-size: 25px;
+    font-weight: bold;
+    color: #920E0E;
+    margin: 15px 0;
+}
+.exclusive .phone {
+    margin-bottom: 15px;
+}
+.exclusive table th {
+    font-weight: bold;
+}
+.exclusive .item {
+    margin-top: 40px;
+}
 @media (min-width: 768px) {
     .navbar .navbar-nav {
         display: inline-block;

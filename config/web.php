@@ -17,6 +17,7 @@ $config = [
             'rules' => [
                 '' => 'site/index',
                 'contact' => 'site/contact',
+                'exclusives' => 'exclusives/index',
                 'login' => 'admin/default/login',
                 'admin' => 'admin/default/index',
                 '<controller:\w+>/<id>' => '<controller>/view',

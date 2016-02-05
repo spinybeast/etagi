@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Exclusives */
 
-$this->title = 'Update Exclusives: ' . ' ' . $model->title;
+$this->title = 'Редактировать Exclusives: ' . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Exclusives', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="exclusives-update">
 
