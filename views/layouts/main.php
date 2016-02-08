@@ -64,7 +64,7 @@ AppAsset::register($this);
             'options' => ['class' => ''],
             'items' => [
                 ['label' => 'Главная', 'url' => ['/site/index']],
-                ['label' => 'Эксклюзивные предложения', 'url' => ['/exclusive']],
+                ['label' => 'Эксклюзивные предложения', 'url' => ['/exclusives']],
                 ['label' => 'Услуги', 'url' => ['/services']],
                 ['label' => 'Карьера', 'url' => ['/career']],
                 ['label' => 'Контакты', 'url' => ['/contact']],

@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "rmrevin/yii2-fontawesome": "~2.12",
         "2amigos/yii2-ckeditor-widget" : "~1.0",
-        "wbraganca/yii2-dynamicform": "dev-master"
+        "wbraganca/yii2-dynamicform": "dev-master",
+        "mongosoft/yii2-upload-behavior": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
