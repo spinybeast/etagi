@@ -30,11 +30,31 @@ class Managers extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['description'], 'string'],
-            [['name', 'photo'], 'string', 'max' => 250],
-            array('photo', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'),
+            [['name'], 'string', 'max' => 250],
+            ['photo', 'image', 'extensions' => 'jpg, jpeg, gif, png', 'checkExtensionByMimeType' => false, 'on' => ['default', 'create', 'update']],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => UploadImageBehavior::className(),
+                'attribute' => 'photo',
+                'scenarios' => ['default', 'create', 'update'],
+                'placeholder' => '@webroot/img/no_photo.jpg',
+                'path' => '@webroot/img/managers/{id}',
+                'url' => '@web/img/managers/{id}',
+                'thumbs' => [
+                    'thumb' => ['width' => 400, 'quality' => 90],
+                    'preview' => ['width' => 200, 'height' => 200],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

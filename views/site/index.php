@@ -1,14 +1,25 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-
+use yii\bootstrap\Carousel;
+use app\models\Banners;
 /* @var $this yii\web\View */
 
 $this->title = 'Этажи недвижимость';
 ?>
 
 <section class="services">
-    <div class="services_bg text-center"><img src="/img/bg1.gif" class="img-responsive" style="" alt=""/></div>
+    <div class="services_bg text-center">
+        <?=
+        Carousel::widget([
+            'items' => Banners::getCarousel(),
+            'controls' => false,
+            'options' => [
+                'interval' => 2000,
+                'class' => 'slide',
+            ]
+        ]);?>
+    </div>
 </section>
 <section class="main_form container">
 

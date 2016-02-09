@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
 use mongosoft\file\UploadImageBehavior;
 /**
  * This is the model class for table "banners".
@@ -41,8 +42,8 @@ class Banners extends \yii\db\ActiveRecord
             [
                 'class' => UploadImageBehavior::className(),
                 'attribute' => 'photo',
-                'scenarios' => ['insert', 'update'],
-                'placeholder' => '@app/modules/user/assets/images/userpic.jpg',
+                'scenarios' => ['default', 'create', 'update'],
+                'placeholder' => '@webroot/img/no_photo.jpg',
                 'path' => '@webroot/img/banners/{id}',
                 'url' => '@web/img/banners/{id}',
                 'thumbs' => [
@@ -63,5 +64,25 @@ class Banners extends \yii\db\ActiveRecord
             'url' => 'Ссылка',
             'photo' => 'Картинка',
         ];
+    }
+
+    public static function getCarousel()
+    {
+        $slider = [];
+        $items = Banners::find()->all();
+
+        foreach ($items as $item) {
+            $slide = '';
+            if (!empty($item->url)) {
+                $slide .= Html::beginTag('a', ['href' => $item->url]);
+            }
+            $slide .= Html::img($item->getUploadUrl('photo'));
+            if (!empty($item->url)) {
+                $slide .= Html::endTag('a');
+            }
+            $slider[] = $slide;
+        }
+
+        return $slider;
     }
 }

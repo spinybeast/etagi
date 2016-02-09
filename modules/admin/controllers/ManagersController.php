@@ -80,7 +80,7 @@ class ManagersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-var_dump(Yii::$app->request->post());
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

@@ -952,6 +952,10 @@ a.btn {
 .exclusive .item {
     margin-top: 40px;
 }
+
+.managers {
+    margin-top: 20px;
+}
 @media (min-width: 768px) {
     .navbar .navbar-nav {
         display: inline-block;
