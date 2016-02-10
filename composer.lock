@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3d56b5a88b07e9c3f85e8b266601efb",
-    "content-hash": "38c9c10c76479190468e20f9389ae044",
+    "hash": "fdc4146bfd5414bd842a79aa4e51d460",
+    "content-hash": "347364ce5433d043105eb9c9f52da558",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -116,6 +116,22 @@
             ]
         },
         {
+            "name": "bower-asset/fancybox",
+            "version": "v2.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fancyapps/fancyBox.git",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fancyapps/fancyBox/zipball/e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
+        {
             "name": "bower-asset/fontawesome",
             "version": "v4.5.0",
             "source": {
@@ -195,6 +211,37 @@
                 "jquery",
                 "library"
             ]
+        },
+        {
+            "name": "bower-asset/jquery-mousewheel",
+            "version": "3.1.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-mousewheel.git",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.2"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./jquery.mousewheel.js",
+                "bower-asset-ignore": [
+                    "*.json",
+                    "*.markdown",
+                    "*.txt",
+                    ".*",
+                    "!LICENSE.txt",
+                    "Gruntfile.js",
+                    "test"
+                ]
+            }
         },
         {
             "name": "bower-asset/jquery.inputmask",
@@ -517,6 +564,51 @@
                 "yii2"
             ],
             "time": "2015-08-27 15:48:02"
+        },
+        {
+            "name": "newerton/yii2-fancybox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/newerton/yii2-fancybox.git",
+                "reference": "9059b2b3198a152b40d1c18ba76c0e5b1e48c7df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/newerton/yii2-fancybox/zipball/9059b2b3198a152b40d1c18ba76c0e5b1e48c7df",
+                "reference": "9059b2b3198a152b40d1c18ba76c0e5b1e48c7df",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fancybox": ">=2.1.5",
+                "bower-asset/jquery-mousewheel": ">=3.1.13",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "newerton\\fancybox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Newerton Vargas de Araujo",
+                    "email": "newerton.araujo@gmail.com"
+                }
+            ],
+            "description": "fancyBox is a tool that offers a nice and elegant way to add zooming functionality for images, html content and multi-media on your webpages.",
+            "keywords": [
+                "extension",
+                "fancyapps",
+                "fancybox",
+                "yii2"
+            ],
+            "time": "2015-12-30 06:44:39"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -1376,7 +1468,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "wbraganca/yii2-dynamicform": 20
+        "wbraganca/yii2-dynamicform": 20,
+        "newerton/yii2-fancybox": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

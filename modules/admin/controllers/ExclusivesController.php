@@ -10,7 +10,9 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+use yii\base\InvalidParamException;
+use yii\helpers\FileHelper;
 /**
  * ExclusivesController implements the CRUD actions for Exclusives model.
  */
@@ -65,6 +67,7 @@ class ExclusivesController extends Controller
         $model = new Exclusives();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->saveModelImages($model);
             $this->saveProperties($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -85,6 +88,7 @@ class ExclusivesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->saveModelImages($model);
             $model->clearProperties();
             $this->saveProperties($model);
             return $this->redirect(['view', 'id' => $model->id]);
@@ -152,6 +156,22 @@ class ExclusivesController extends Controller
                     $propertyVal->property_id = $propertyName->id;
                     $propertyVal->value = $property['value'];
                     $propertyVal->save();
+                }
+            }
+        }
+    }
+
+    private function saveModelImages($model)
+    {
+        $model->images = UploadedFile::getInstances($model, 'images');
+
+        if ($model->images && $model->validate()) {
+            foreach ($model->images as $file) {
+                $path = Yii::getAlias(Exclusives::$path . $model->id . '/' . $file->baseName . '.' . $file->extension);
+                if (!FileHelper::createDirectory(dirname($path))) {
+                    throw new InvalidParamException("Directory specified in 'thumbPath' attribute doesn't exist or cannot be created.");
+                } else {
+                    $file->saveAs($path);
                 }
             }
         }

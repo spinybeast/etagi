@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap\Carousel;
 
 $this->title = $model->title;
 ?>
@@ -39,7 +40,19 @@ $this->title = $model->title;
         <div class="col-md-5">
             <p class="phone"><b>Телефон:</b> <?= $model->phone ?></p>
             <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x550" alt="">
+                <?php
+                $images = [];
+                foreach ($model->getImages() as $img) {
+                    $images[] = Html::img($img);
+                }
+                echo Carousel::widget([
+                    'items' => $images,
+                    'options' => [
+                        'interval' => 2000,
+                        'class' => 'slide',
+                    ]
+                ]);
+                    ?>
             </a>
             <p class="text-right price"><?= number_format($model->price, 0, ' ', ' ') ?> руб.</p>
         </div>

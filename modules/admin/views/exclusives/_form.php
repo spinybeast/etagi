@@ -90,7 +90,7 @@ use dosamigos\ckeditor\CKEditor;
         <?php DynamicFormWidget::end(); ?>
     </div>
     <?= $form->field($model, 'lot_number')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'images[]')->fileInput(['multiple' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

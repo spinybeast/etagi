@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "exclusives".
@@ -18,6 +19,9 @@ use Yii;
  */
 class Exclusives extends \yii\db\ActiveRecord
 {
+
+    public $images = [];
+    public static $path = '@webroot/img/exclusives/';
     /**
      * @inheritdoc
      */
@@ -35,7 +39,8 @@ class Exclusives extends \yii\db\ActiveRecord
             [['title', 'description'], 'required'],
             [['description', 'address'], 'string'],
             [['price'], 'integer'],
-            [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200]
+            [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200],
+            [['images'], 'file', 'maxFiles' => 10]
         ];
     }
 
@@ -77,5 +82,17 @@ class Exclusives extends \yii\db\ActiveRecord
             $content .= $property->name . ': ' . $property->value . '<br />';
         }
         return $content;
+    }
+
+    public function getImages()
+    {
+        $images = [];
+        $path = Yii::getAlias(self::$path . $this->id);
+        if ($files = FileHelper::findFiles($path)) {
+            foreach ($files as $file) {
+                $images[] = Yii::getAlias('@web/img/exclusives/' . $this->id . '/' . basename($file));
+            }
+        }
+        return $images;
     }
 }

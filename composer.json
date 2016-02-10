@@ -21,7 +21,8 @@
         "rmrevin/yii2-fontawesome": "~2.12",
         "2amigos/yii2-ckeditor-widget" : "~1.0",
         "wbraganca/yii2-dynamicform": "dev-master",
-        "mongosoft/yii2-upload-behavior": "*"
+        "mongosoft/yii2-upload-behavior": "*",
+        "newerton/yii2-fancybox": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
