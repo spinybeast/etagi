@@ -11,7 +11,7 @@ $this->title = 'Эксклюзивные квартиры';
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header text-center">
-                <?= $this->title ?><br/>
+                <?= Html::encode($this->title) ?><br/>
                 <small>Только в нашей компании.</small>
             </h1>
         </div>

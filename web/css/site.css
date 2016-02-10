@@ -851,7 +851,7 @@ i, em {
 
 /* contacts
 -----------------------------------------------------------------------------*/
-a.btn {
+.btn {
     text-decoration: none;
     border-radius: 0;
 }
@@ -956,6 +956,8 @@ a.btn {
 .managers {
     margin-top: 20px;
 }
+
+
 @media (min-width: 768px) {
     .navbar .navbar-nav {
         display: inline-block;
