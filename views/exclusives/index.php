@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap\Carousel;
 
 $this->title = 'Эксклюзивные квартиры';
 ?>
@@ -24,18 +25,37 @@ $this->title = 'Эксклюзивные квартиры';
             foreach ($exclusives as $key => $item) { ?>
                 <div class="col-md-3">
                     <div class="exclusives-item">
-                        <a href="#">
-                            <img class="img-responsive" src="http://placehold.it/700x550" alt="">
-                        </a>
+                        <div class="img">
+                            <?php $images = [];
+                            foreach ($item->getImages() as $img) {
+                                $images[] = Html::img($img);
+                            }
+                            if (count($images) > 1) {
+                                echo Carousel::widget([
+                                    'items' => $images,
+                                    'showIndicators' =>false,
+                                    'options' => [
+                                        'interval' => false,
+                                        'pause' => true,
+                                        'class' => 'slide',
+                                    ]
+                                ]);
+                            } else {
+                                echo current($images);
+                            }
+                            ?>
+                        </div>
                         <div class="col-md-12">
                             <h3 class="title">
-                                <a href="<?= Url::to(['exclusives/view', 'id' => $item->id])?>"><?= $item->title ?></a>
+                                <a href="<?= Url::to(['exclusives/view', 'id' => $item->id]) ?>"><?= $item->title ?></a>
                             </h3>
 
                             <p class="address"><?= $item->address ?></p>
+
                             <p class="text-right price"><?= number_format($item->price, 0, ' ', ' ') ?> руб.</p>
+
                             <div class="pull-left">
-                                <a href="<?= Url::to(['exclusives/view', 'id' => $item->id])?>" class="btn btn-danger">Подробнее</a>
+                                <a href="<?= Url::to(['exclusives/view', 'id' => $item->id]) ?>" class="btn btn-danger">Подробнее</a>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -46,3 +66,9 @@ $this->title = 'Эксклюзивные квартиры';
         } ?>
     <?php } ?>
 </div>
+<?php $this->registerJs("$(document).ready(function() {
+        $('.carousel').carousel({
+            pause: true,
+            interval: false
+        });
+    });") ?>

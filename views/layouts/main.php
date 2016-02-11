@@ -18,7 +18,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Этажи недвижимость  | <?= Html::encode($this->title) ?></title>
     <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet'
           type='text/css'>
     <?php $this->head() ?>
@@ -65,8 +65,8 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Главная', 'url' => ['/site/index']],
                 ['label' => 'Эксклюзивные предложения', 'url' => ['/exclusives']],
-                ['label' => 'Новостройки', 'url' => ['/exclusives']],
-                ['label' => 'Ипотека', 'url' => ['/exclusives']],
+//                ['label' => 'Новостройки', 'url' => ['/exclusives']],
+                ['label' => 'Ипотека', 'url' => ['/mortgage']],
                 ['label' => 'Карьера', 'url' => ['/career']],
                 ['label' => 'Отзывы', 'url' => ['/reviews']],
                 ['label' => 'Контакты', 'url' => ['/contact']],

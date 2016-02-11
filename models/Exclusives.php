@@ -88,11 +88,22 @@ class Exclusives extends \yii\db\ActiveRecord
     {
         $images = [];
         $path = Yii::getAlias(self::$path . $this->id);
-        if ($files = FileHelper::findFiles($path)) {
+        if (is_dir($path) && $files = FileHelper::findFiles($path)) {
             foreach ($files as $file) {
                 $images[] = Yii::getAlias('@web/img/exclusives/' . $this->id . '/' . basename($file));
             }
         }
+        if (empty($images)) {
+            $images[] = Yii::getAlias('@web/img/no_photo.jpg');
+        }
         return $images;
+    }
+
+    public function beforeDelete()
+    {
+        $path = Yii::getAlias(self::$path . $this->id);
+        FileHelper::removeDirectory($path);
+
+        return parent::beforeDelete();
     }
 }

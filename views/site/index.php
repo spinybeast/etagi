@@ -5,7 +5,7 @@ use yii\bootstrap\Carousel;
 use app\models\Banners;
 /* @var $this yii\web\View */
 
-$this->title = 'Этажи недвижимость';
+$this->title = 'Главная';
 ?>
 
 <section class="services">

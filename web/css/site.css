@@ -952,7 +952,12 @@ i, em {
 .exclusive .item {
     margin-top: 40px;
 }
-
+.exclusives-item .img {
+    height: 240px;
+}
+.exclusives-item .img img {
+    height: 240px;
+}
 .managers {
     margin-top: 20px;
 }

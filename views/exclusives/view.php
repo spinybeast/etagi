@@ -18,21 +18,22 @@ $this->title = $model->title;
     </div>
     <div class="item">
         <div class="col-md-7">
-            <?php if (!empty($model->address)) {?>
+            <?php if (!empty($model->address)) { ?>
                 <p class="address"><b>Адрес:</b> <?= $model->address ?></p>
             <?php } ?>
-            <?php if (!empty($model->properties)) {?>
+            <?php if (!empty($model->properties)) { ?>
                 <table class="table table-responsive">
-                    <?php foreach ($model->properties as $property) {?>
+                    <?php foreach ($model->properties as $property) { ?>
                         <tr>
                             <th><?= $property->name ?></th>
                             <td><?= $property->value ?></td>
                         </tr>
-                    <?php }?>
+                    <?php } ?>
                 </table>
             <?php } ?>
             <h3 class="text-uppercase">Описание квартиры</h3>
             <br/>
+
             <div class="description">
                 <?= $model->description ?>
             </div>
@@ -45,15 +46,20 @@ $this->title = $model->title;
                 foreach ($model->getImages() as $img) {
                     $images[] = Html::img($img);
                 }
-                echo Carousel::widget([
-                    'items' => $images,
-                    'options' => [
-                        'interval' => 2000,
-                        'class' => 'slide',
-                    ]
-                ]);
-                    ?>
+                if (count($images) > 1) {
+                    echo Carousel::widget([
+                        'items' => $images,
+                        'options' => [
+                            'interval' => 2000,
+                            'class' => 'slide',
+                        ]
+                    ]);
+                } else {
+                    echo current($images);
+                }
+                ?>
             </a>
+
             <p class="text-right price"><?= number_format($model->price, 0, ' ', ' ') ?> руб.</p>
         </div>
     </div>
