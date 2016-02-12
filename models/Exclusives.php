@@ -16,12 +16,21 @@ use yii\helpers\FileHelper;
  * @property string $lot_number
  * @property integer $price
  * @property string $address
+ * @property string $type
  */
 class Exclusives extends \yii\db\ActiveRecord
 {
 
     public $images = [];
     public static $path = '@webroot/img/exclusives/';
+
+    const HOUSE = 1;
+    const FLAT = 0;
+
+    public static $types = array(
+        self::HOUSE => 'Дом',
+        self::FLAT => 'Квартира',
+    );
     /**
      * @inheritdoc
      */
@@ -38,7 +47,7 @@ class Exclusives extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description', 'address'], 'string'],
-            [['price'], 'integer'],
+            [['price', 'type'], 'integer'],
             [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200],
             [['images'], 'file', 'maxFiles' => 10]
         ];
@@ -58,6 +67,8 @@ class Exclusives extends \yii\db\ActiveRecord
             'phone' => 'Телефон',
             'lot_number' => 'Номер лота',
             'address' => 'Адрес',
+            'typeName' => 'Тип',
+            'type' => 'Тип'
         ];
     }
 
@@ -82,6 +93,11 @@ class Exclusives extends \yii\db\ActiveRecord
             $content .= $property->name . ': ' . $property->value . '<br />';
         }
         return $content;
+    }
+
+    public function getTypeName()
+    {
+        return self::$types[$this->type];
     }
 
     public function getImages()

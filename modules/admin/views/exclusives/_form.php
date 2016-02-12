@@ -18,6 +18,8 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'type')->dropDownList($model::$types) ?>
+
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true, 'id' => 'address']) ?>

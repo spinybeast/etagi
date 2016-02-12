@@ -28,7 +28,7 @@ class Reviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['author'], 'required'],
+            [['author'], 'required', 'message' => 'Введите Ваше имя'],
             [['text'], 'string'],
             [['published'], 'integer'],
             [['author'], 'string', 'max' => 250]

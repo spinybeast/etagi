@@ -961,6 +961,10 @@ i, em {
 .managers {
     margin-top: 20px;
 }
+.reviews-form .help-block {
+    font-size: 13px;
+    top: 45px;
+}
 
 
 @media (min-width: 768px) {

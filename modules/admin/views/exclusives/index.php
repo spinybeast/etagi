@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'title',
             'price',
+            'typeName',
             'address',
             'description:html',
             'agent',
