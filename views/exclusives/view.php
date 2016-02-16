@@ -18,6 +18,10 @@ $this->title = $model->title;
     </div>
     <div class="item">
         <div class="col-md-7">
+            <?php if (!empty($model->rooms)) { ?>
+                <p class="rooms"><b>Количество комнат:</b> <?= $model->rooms ?></p>
+            <?php } ?>
+
             <?php if (!empty($model->address)) { ?>
                 <p class="address"><b>Адрес:</b> <?= $model->address ?></p>
             <?php } ?>

@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use yii\db\Query;
 
 /**
  * This is the model class for table "exclusives".
@@ -17,6 +19,7 @@ use yii\helpers\FileHelper;
  * @property integer $price
  * @property string $address
  * @property string $type
+ * @property int $rooms
  */
 class Exclusives extends \yii\db\ActiveRecord
 {
@@ -47,7 +50,7 @@ class Exclusives extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description', 'address'], 'string'],
-            [['price', 'type'], 'integer'],
+            [['price', 'type', 'rooms'], 'integer'],
             [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200],
             [['images'], 'file', 'maxFiles' => 10]
         ];
@@ -62,6 +65,7 @@ class Exclusives extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Название',
             'price' => 'Цена',
+            'rooms' => 'Количество комнат',
             'description' => 'Описание',
             'agent' => 'Агент',
             'phone' => 'Телефон',
@@ -121,5 +125,18 @@ class Exclusives extends \yii\db\ActiveRecord
         FileHelper::removeDirectory($path);
 
         return parent::beforeDelete();
+    }
+
+    public static function getRoomFilters()
+    {
+        $rooms = (new Query())
+            ->select(['rooms',])
+            ->from(self::tableName())
+            ->distinct()
+            ->where('rooms is not null')
+            ->orderBy('rooms')
+            ->all();
+
+        return ArrayHelper::map($rooms, 'rooms', 'rooms');
     }
 }

@@ -22,7 +22,8 @@ $config = [
                 'reviews/create' => 'reviews/create',
                 'login' => 'admin/default/login',
                 'admin' => 'admin/default/index',
-                '<controller:\w+>/<id>' => '<controller>/view',
+                '<controller:(exclusives)>/<action:(house|flat|rooms)>' => '<controller>/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<action:\w+>' => 'site/static',
             ]
         ],

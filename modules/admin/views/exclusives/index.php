@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'price',
             'typeName',
+            'rooms',
             'address',
             'description:html',
             'agent',

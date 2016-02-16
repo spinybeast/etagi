@@ -327,7 +327,11 @@ i, em {
     height: 4px;
     background: #8E3838;
 }
-
+.filter_panel {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
 /* Middle
 -----------------------------------------------------------------------------*/
 .content {

@@ -18,6 +18,27 @@ class ExclusivesController extends Controller
         ]);
     }
 
+    public function actionHouse()
+    {
+        return $this->render('index', [
+            'exclusives' => Exclusives::findAll(['type' => Exclusives::HOUSE])
+        ]);
+    }
+
+    public function actionFlat()
+    {
+        return $this->render('index', [
+            'exclusives' => Exclusives::findAll(['type' => Exclusives::FLAT])
+        ]);
+    }
+
+    public function actionRooms($count)
+    {
+        return $this->render('index', [
+            'exclusives' => Exclusives::findAll(['rooms' => $count])
+        ]);
+    }
+
     public function actionView($id)
     {
         return $this->render('view', [
