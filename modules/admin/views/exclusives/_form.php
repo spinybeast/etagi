@@ -7,7 +7,7 @@ use rmrevin\yii\fontawesome\FA;
 use app\models\ExclusivesProperties;
 use wbraganca\dynamicform\DynamicFormWidget;
 use dosamigos\ckeditor\CKEditor;
-use kartik\file\FileInput;
+use zxbodya\yii2\galleryManager\GalleryManager;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Exclusives */
@@ -55,7 +55,7 @@ use kartik\file\FileInput;
                 <h4>
                     <i class="glyphicon glyphicon-tags"></i> Характеристики
                     <button type="button" class="add-item btn btn-success btn-sm pull-right">
-                        <?= FA::icon('plus') ?>
+                        <?= FA::icon('plus') ?> Добавить
                     </button>
                 </h4>
             </div>
@@ -73,7 +73,7 @@ use kartik\file\FileInput;
 
                                 <div class="pull-right">
                                     <button type="button" class="remove-item btn btn-danger btn-xs">
-                                        <?= FA::icon('minus') ?>
+                                        <?= FA::icon('minus') ?> Удалить
                                     </button>
                                 </div>
                                 <div class="clearfix"></div>
@@ -97,21 +97,11 @@ use kartik\file\FileInput;
         <?php DynamicFormWidget::end(); ?>
     </div>
     <?= $form->field($model, 'lot_number')->textInput(['maxlength' => true]) ?>
-    <?php $images = [];
-    foreach ($model->getImages() as $image) {
-        $images[] = Html::img($image, ['class' => 'img-responsive', 'width' => 150]);
-    }
-    echo $form->field($model, 'images[]')->widget(FileInput::classname(), [
-        'language' => 'ru',
-        'pluginOptions' => [
-            'initialPreview' => $images,
-            'overwriteInitial' => false
-        ],
-        'options' => [
-            'accept' => 'image/*',
-            'multiple' => true
-        ],
-    ]); ?>
+    <?= GalleryManager::widget([
+        'model' => $model,
+        'behaviorName' => 'galleryBehavior',
+        'apiRoute' => 'exclusives/galleryApi'
+    ]);?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

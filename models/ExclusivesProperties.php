@@ -43,7 +43,8 @@ class ExclusivesProperties extends \yii\db\ActiveRecord
             'id' => 'ID',
             'exclusive_id' => 'Exclusive ID',
             'property_id' => 'Property ID',
-            'value' => 'Value',
+            'value' => 'Значение',
+            'name' => 'Название (например, этаж)',
         ];
     }
 

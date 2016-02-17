@@ -47,10 +47,7 @@ $this->title = $model->title;
             <p class="phone"><b>Телефон:</b> <?= $model->phone ?></p>
             <a href="#">
                 <?php
-                $images = [];
-                foreach ($model->getImages() as $img) {
-                    $images[] = Html::img($img);
-                }
+                $images = $model->getImages();
                 if (count($images) > 1) {
                     echo Carousel::widget([
                         'items' => $images,

@@ -4,8 +4,9 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\db\Query;
+use zxbodya\yii2\galleryManager\GalleryBehavior;
 
 /**
  * This is the model class for table "exclusives".
@@ -23,9 +24,6 @@ use yii\db\Query;
  */
 class Exclusives extends \yii\db\ActiveRecord
 {
-
-    public $images = [];
-    public static $path = '@webroot/img/exclusives/';
 
     const HOUSE = 1;
     const FLAT = 0;
@@ -52,10 +50,23 @@ class Exclusives extends \yii\db\ActiveRecord
             [['description', 'address'], 'string'],
             [['price', 'type', 'rooms'], 'integer'],
             [['title', 'agent', 'phone', 'lot_number'], 'string', 'max' => 200],
-            [['images'], 'file', 'maxFiles' => 10]
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            'galleryBehavior' => [
+                'class' => GalleryBehavior::className(),
+                'type' => 'product',
+                'extension' => 'jpg',
+                'directory' => Yii::getAlias('@webroot') . '/img/exclusives',
+                'url' => Yii::getAlias('@web') . '/img/exclusives',
+                'hasName' => false,
+                'hasDescription' => false,
+                'versions' => []
+            ]
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -105,27 +116,16 @@ class Exclusives extends \yii\db\ActiveRecord
         return self::$types[$this->type];
     }
 
-    public function getImages()
+    public function getImages($type = 'original')
     {
         $images = [];
-        $path = Yii::getAlias(self::$path . $this->id);
-        if (is_dir($path) && $files = FileHelper::findFiles($path)) {
-            foreach ($files as $file) {
-                $images[] = Yii::getAlias('@web/img/exclusives/' . $this->id . '/' . basename($file));
-            }
+        foreach($this->getBehavior('galleryBehavior')->getImages() as $image) {
+            $images[] = Html::img($image->getUrl($type), ['class' => 'img-responsive']);
         }
         if (empty($images)) {
-            $images[] = Yii::getAlias('@web/img/no_photo.jpg');
+            $images[] = Html::img(Yii::getAlias('@web/img/no_photo.jpg'));
         }
         return $images;
-    }
-
-    public function beforeDelete()
-    {
-        $path = Yii::getAlias(self::$path . $this->id);
-        FileHelper::removeDirectory($path);
-
-        return parent::beforeDelete();
     }
 
     public static function getRoomFilters()

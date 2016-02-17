@@ -45,10 +45,8 @@ $this->title = 'Эксклюзивные квартиры';
                     <div class="col-md-3">
                         <div class="exclusives-item">
                             <div class="img">
-                                <?php $images = [];
-                                foreach ($item->getImages() as $img) {
-                                    $images[] = Html::img($img);
-                                }
+                                <?php
+                                $images = $item->getImages('preview');
                                 if (count($images) > 1) {
                                     echo Carousel::widget([
                                         'items' => $images,
