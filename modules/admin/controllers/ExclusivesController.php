@@ -167,7 +167,7 @@ class ExclusivesController extends Controller
 
         if ($model->images && $model->validate()) {
             foreach ($model->images as $file) {
-                $path = Yii::getAlias(Exclusives::$path . $model->id . '/' . $file->baseName . '.' . $file->extension);
+                $path = Yii::getAlias(Exclusives::$path . $model->id . '/' . md5($file->baseName) . '.' . $file->extension);
                 if (!FileHelper::createDirectory(dirname($path))) {
                     throw new InvalidParamException("Directory specified in 'thumbPath' attribute doesn't exist or cannot be created.");
                 } else {

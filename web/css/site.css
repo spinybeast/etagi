@@ -950,6 +950,18 @@ i, em {
 .exclusive .phone {
     margin-bottom: 15px;
 }
+.exclusive .address {
+    margin: 15px 0;
+}
+.exclusive .rooms {
+    margin-bottom: 15px;
+}
+.exclusive .header-exs {
+    background: #8B231D;
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+}
 .exclusive table th {
     font-weight: bold;
 }

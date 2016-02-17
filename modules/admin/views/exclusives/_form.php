@@ -1,17 +1,19 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\models\ExclusivesProperties;
 use wbraganca\dynamicform\DynamicFormWidget;
 use dosamigos\ckeditor\CKEditor;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Exclusives */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<link href="https://dadata.ru/static/css/lib/suggestions-15.12.css" type="text/css" rel="stylesheet" />
+<link href="https://dadata.ru/static/css/lib/suggestions-15.12.css" type="text/css" rel="stylesheet"/>
 <div class="exclusives-form">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -59,7 +61,7 @@ use dosamigos\ckeditor\CKEditor;
             </div>
             <div class="panel-body">
                 <div class="container-items"><!-- widgetBody -->
-                    <?php if (!empty($model->properties)){
+                    <?php if (!empty($model->properties)) {
                         $properties = $model->properties;
                     } else {
                         $properties = [new ExclusivesProperties()];
@@ -68,6 +70,7 @@ use dosamigos\ckeditor\CKEditor;
                         <div class="item panel panel-default"><!-- widgetItem -->
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Характеристика <?= $i + 1 ?></h3>
+
                                 <div class="pull-right">
                                     <button type="button" class="remove-item btn btn-danger btn-xs">
                                         <?= FA::icon('minus') ?>
@@ -78,7 +81,7 @@ use dosamigos\ckeditor\CKEditor;
                             <div class="panel-body">
                                 <?php
                                 // necessary for update action.
-                                if (! $property->isNewRecord) {
+                                if (!$property->isNewRecord) {
                                     echo Html::activeHiddenInput($property, "[{$i}]id");
                                 }
                                 ?>
@@ -94,7 +97,21 @@ use dosamigos\ckeditor\CKEditor;
         <?php DynamicFormWidget::end(); ?>
     </div>
     <?= $form->field($model, 'lot_number')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'images[]')->fileInput(['multiple' => true]) ?>
+    <?php $images = [];
+    foreach ($model->getImages() as $image) {
+        $images[] = Html::img($image, ['class' => 'img-responsive', 'width' => 150]);
+    }
+    echo $form->field($model, 'images[]')->widget(FileInput::classname(), [
+        'language' => 'ru',
+        'pluginOptions' => [
+            'initialPreview' => $images,
+            'overwriteInitial' => false
+        ],
+        'options' => [
+            'accept' => 'image/*',
+            'multiple' => true
+        ],
+    ]); ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Редактировать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -102,20 +119,11 @@ use dosamigos\ckeditor\CKEditor;
     <?php ActiveForm::end(); ?>
 
 </div>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<!--[if lt IE 10]>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
-<![endif]-->
-<script type="text/javascript" src="https://dadata.ru/static/js/lib/jquery.suggestions-15.12.min.js"></script>
-<script type="text/javascript">
+<?= $this->registerJs('
     $("#address").suggestions({
         serviceUrl: "https://dadata.ru/api/v2",
         token: "b6e8f677ffaa72cc02e31e586fa223d9590e5282",
         type: "ADDRESS",
-        count: 5,
-        /* Вызывается, когда пользователь выбирает одну из подсказок */
-        onSelect: function(suggestion) {
-            console.log(suggestion);
-        }
-    });
-</script>
+        count: 10,
+    });'); ?>
+

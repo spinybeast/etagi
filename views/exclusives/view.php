@@ -26,6 +26,7 @@ $this->title = $model->title;
                 <p class="address"><b>Адрес:</b> <?= $model->address ?></p>
             <?php } ?>
             <?php if (!empty($model->properties)) { ?>
+                <h3 class="text-uppercase header-exs">Характеристики</h3>
                 <table class="table table-responsive">
                     <?php foreach ($model->properties as $property) { ?>
                         <tr>
@@ -35,7 +36,7 @@ $this->title = $model->title;
                     <?php } ?>
                 </table>
             <?php } ?>
-            <h3 class="text-uppercase">Описание квартиры</h3>
+            <h3 class="text-uppercase header-exs">Описание</h3>
             <br/>
 
             <div class="description">

@@ -72,6 +72,7 @@ class Exclusives extends \yii\db\ActiveRecord
             'lot_number' => 'Номер лота',
             'address' => 'Адрес',
             'typeName' => 'Тип',
+            'rawProperties' => 'Характеристики',
             'type' => 'Тип'
         ];
     }
@@ -133,7 +134,7 @@ class Exclusives extends \yii\db\ActiveRecord
             ->select(['rooms',])
             ->from(self::tableName())
             ->distinct()
-            ->where('rooms is not null')
+            ->where('rooms is not null and rooms > 0')
             ->orderBy('rooms')
             ->all();
 
