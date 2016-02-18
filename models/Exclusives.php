@@ -120,10 +120,10 @@ class Exclusives extends \yii\db\ActiveRecord
     {
         $images = [];
         foreach($this->getBehavior('galleryBehavior')->getImages() as $image) {
-            $images[] = Html::img($image->getUrl($type), ['class' => 'img-responsive']);
+            $images[] = $image->getUrl($type);
         }
         if (empty($images)) {
-            $images[] = Html::img(Yii::getAlias('@web/img/no_photo.jpg'));
+            $images[] = Yii::getAlias('@web/img/no_photo.jpg');
         }
         return $images;
     }

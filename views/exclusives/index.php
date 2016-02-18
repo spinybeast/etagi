@@ -46,21 +46,48 @@ $this->title = 'Эксклюзивные квартиры';
                         <div class="exclusives-item">
                             <div class="img">
                                 <?php
-                                $images = $item->getImages('preview');
-                                if (count($images) > 1) {
-                                    echo Carousel::widget([
-                                        'items' => $images,
-                                        'showIndicators' => false,
-                                        'options' => [
-                                            'interval' => false,
-                                            'pause' => true,
-                                            'class' => 'slide',
-                                        ]
-                                    ]);
-                                } else {
-                                    echo current($images);
+                                echo newerton\fancybox\FancyBox::widget([
+                                    'target' => 'a[rel=fancybox' . $item->id . ']',
+                                    'helpers' => true,
+                                    'mouse' => true,
+                                    'config' => [
+                                        'maxWidth' => '100%',
+                                        'maxHeight' => '100%',
+                                        'playSpeed' => 3000,
+                                        'padding' => 0,
+                                        'fitToView' => true,
+                                        'width' => '100%',
+                                        'height' => '100%',
+                                        'closeEffect' => 'elastic',
+                                        'prevEffect' => 'elastic',
+                                        'nextEffect' => 'elastic',
+                                        'closeBtn' => false,
+                                        'openOpacity' => true,
+                                        'helpers' => [
+                                            'buttons' => [],
+                                            'overlay' => [
+                                                'css' => [
+                                                    'background' => 'rgba(0, 0, 0, 0.8)'
+                                                ]
+                                            ]
+                                        ],
+                                    ]
+                                ]);
+                                $images = $item->getImages();
+                                $img = [];
+                                foreach ($images as $image) {
+                                    $img[] = Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
                                 }
-                                ?>
+                                echo Carousel::widget([
+                                    'items' => $img,
+                                    'showIndicators' => false,
+
+                                    'options' => [
+                                        'class' => 'slide',
+                                        'pause' => true,
+                                        'interval' => false,
+                                    ]
+                                ]); ?>
                             </div>
                             <div class="col-md-12">
                                 <h3 class="title">
@@ -87,10 +114,7 @@ $this->title = 'Эксклюзивные квартиры';
             </div>
     </div>
 <?php $this->registerJs("$(document).ready(function() {
-    $('.carousel').carousel({
-        pause: true,
-        interval: false
-    });
+    $('.carousel').carousel('pause');
     $(document)
       .on('pjax:start', function() { $('#exclusive-items').fadeOut(12000); })
       .on('pjax:end', function() { $('#exclusive-items').fadeIn(12000); })

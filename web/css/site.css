@@ -956,6 +956,10 @@ i, em {
 .exclusive .rooms {
     margin-bottom: 15px;
 }
+.exclusive .carousel img{
+    height: 100%;
+    width: 100%;
+}
 .exclusive .header-exs {
     background: #8B231D;
     padding: 10px;
@@ -971,8 +975,17 @@ i, em {
 .exclusives-item .img {
     height: 240px;
 }
+.exclusives-item .img:hover::before  {
+    position: absolute;
+    width: 240px;
+    height: 100%;
+    left: 0;
+    top:0;
+    background: black;
+}
 .exclusives-item .img img {
-    height: 240px;
+    height: 240px !important;
+    width: 100%;
 }
 .managers {
     margin-top: 20px;

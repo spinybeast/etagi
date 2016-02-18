@@ -47,19 +47,44 @@ $this->title = $model->title;
             <p class="phone"><b>Телефон:</b> <?= $model->phone ?></p>
             <a href="#">
                 <?php
+                echo newerton\fancybox\FancyBox::widget([
+                    'target' => 'a[rel=fancybox' . $model->id . ']',
+                    'helpers' => true,
+                    'mouse' => true,
+                    'config' => [
+                        'maxWidth' => '100%',
+                        'maxHeight' => '100%',
+                        'playSpeed' => 3000,
+                        'padding' => 0,
+                        'fitToView' => true,
+                        'width' => '100%',
+                        'height' => '100%',
+                        'closeEffect' => 'elastic',
+                        'prevEffect' => 'elastic',
+                        'nextEffect' => 'elastic',
+                        'closeBtn' => false,
+                        'openOpacity' => true,
+                        'helpers' => [
+                            'buttons' => [],
+                            'overlay' => [
+                                'css' => [
+                                    'background' => 'rgba(0, 0, 0, 0.8)'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]);
                 $images = $model->getImages();
-                if (count($images) > 1) {
-                    echo Carousel::widget([
-                        'items' => $images,
-                        'options' => [
-                            'interval' => 2000,
-                            'class' => 'slide',
-                        ]
-                    ]);
-                } else {
-                    echo current($images);
+                $img = [];
+                foreach ($images as $image) {
+                    $img[] = Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $model->id]);
                 }
-                ?>
+                echo Carousel::widget([
+                    'items' => $img,
+                    'options' => [
+                        'class' => 'slide',
+                    ]
+                ]); ?>
             </a>
 
             <p class="text-right price"><?= number_format($model->price, 0, ' ', ' ') ?> руб.</p>
