@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use rmrevin\yii\fontawesome\FA;
 use app\models\ExclusivesProperties;

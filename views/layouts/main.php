@@ -68,6 +68,7 @@ AppAsset::register($this);
 //                ['label' => 'Новостройки', 'url' => ['/exclusives']],
                 ['label' => 'Ипотека', 'url' => ['/mortgage']],
                 ['label' => 'Карьера', 'url' => ['/career']],
+                ['label' => 'Услуги', 'url' => ['/services']],
                 ['label' => 'Отзывы', 'url' => ['/reviews']],
                 ['label' => 'Контакты', 'url' => ['/contact']],
             ],
