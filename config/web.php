@@ -18,6 +18,7 @@ $config = [
                 '' => 'site/index',
                 'contact' => 'site/contact',
                 'exclusives' => 'exclusives/index',
+                'services' => 'services/index',
                 'reviews' => 'reviews/index',
                 'reviews/create' => 'reviews/create',
                 'login' => 'admin/default/login',

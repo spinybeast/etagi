@@ -15,7 +15,7 @@ use zxbodya\yii2\galleryManager\GalleryManagerAction;
 /**
  * ExclusivesController implements the CRUD actions for Exclusives model.
  */
-class ExclusivesController extends Controller
+class ExclusivesController extends DefaultController
 {
     public function behaviors()
     {

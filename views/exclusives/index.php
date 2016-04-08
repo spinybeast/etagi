@@ -4,9 +4,9 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\Carousel;
 use yii\widgets\Pjax;
 use \app\models\Exclusives;
+sersid\owlcarousel\Asset::register($this);
 
 $this->title = 'Эксклюзивные квартиры';
 ?>
@@ -21,18 +21,31 @@ $this->title = 'Эксклюзивные квартиры';
         </div>
 
         <?php if (!empty($exclusives)) {
+            $active = Yii::$app->session->getFlash('activeButton');
+            $houses = $flats = 0;
+            foreach ($exclusives as $item) {
+                if ($item->type === Exclusives::HOUSE) {
+                    $houses++;
+                } elseif ($item->type === Exclusives::FLAT) {
+                    $flats++;
+                }
+            }
             Pjax::begin(['enablePushState' => false]); ?>
             <div class="filter_panel well">
                 <?= Html::a('Показать все', ['exclusives/index'], ['class' => 'btn btn-primary']) ?>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="btn-group" data-toggle="buttons">
-                    <?= Html::a('Дом', ['exclusives/house'], ['class' => 'btn btn-default']) ?>
-                    <?= Html::a('Квартира', ['exclusives/flat'], ['class' => 'btn btn-default']) ?>
+                    <?php if ((!$active && $houses > 0) || $active) {
+                        echo Html::a('Дом', ['exclusives/house'], ['class' => 'btn btn-default' . ($active === 'house' ? ' active' : '')]);
+                    }
+                    if ((!$active && $flats > 0) || $active) {
+                        echo Html::a('Квартира', ['exclusives/flat'], ['class' => 'btn btn-default' . ($active === 'flat' ? ' active' : '')]);
+                    } ?>
                 </div>
                 <div class="btn-group" data-toggle="buttons">
                     <?php if ($filters = Exclusives::getRoomFilters()) {
                         foreach ($filters as $count) {
-                            echo Html::a($count . '-комнатные', ['exclusives/rooms', 'count' => $count], ['class' => 'btn btn-default']);
+                            echo Html::a($count . '-комнатные', ['exclusives/rooms', 'count' => $count], ['class' => 'btn btn-default' . ($active === 'rooms' . $count ? ' active' : '')]);
                         }
                     } ?>
                 </div>
@@ -74,20 +87,12 @@ $this->title = 'Эксклюзивные квартиры';
                                     ]
                                 ]);
                                 $images = $item->getImages();
-                                $img = [];
+                                echo Html::beginTag('div', ['class' => 'carousel']);
                                 foreach ($images as $image) {
-                                    $img[] = Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
+                                    echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
                                 }
-                                echo Carousel::widget([
-                                    'items' => $img,
-                                    'showIndicators' => false,
-
-                                    'options' => [
-                                        'class' => 'slide',
-                                        'pause' => true,
-                                        'interval' => false,
-                                    ]
-                                ]); ?>
+                                echo Html::endTag('div');
+                                ?>
                             </div>
                             <div class="col-md-12">
                                 <h3 class="title">
@@ -109,14 +114,23 @@ $this->title = 'Эксклюзивные квартиры';
                 <?php } ?>
                 <?php echo Html::endTag('div');
             }
+            echo \yii\widgets\LinkPager::widget([
+                'pagination' => $pages,
+            ]);
             Pjax::end(); ?>
+        <?php } else {?>
+            <h3>Результатов нет</h3>
         <?php } ?>
             </div>
     </div>
-<?php $this->registerJs("$(document).ready(function() {
-    $('.carousel').carousel('pause');
+
+<?php $this->registerJs("$(function(){
+    $('.carousel').owlCarousel({
+        items: 1,
+        loop: true,
+    });
     $(document)
       .on('pjax:start', function() { $('#exclusive-items').fadeOut(12000); })
-      .on('pjax:end', function() { $('#exclusive-items').fadeIn(12000); })
-    });"
+      .on('pjax:end', function() { $('#exclusive-items').fadeIn(12000); });
+  });"
 ); ?>

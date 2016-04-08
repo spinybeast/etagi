@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ServicesController implements the CRUD actions for Services model.
  */
-class ServicesController extends Controller
+class ServicesController extends DefaultController
 {
     public function behaviors()
     {

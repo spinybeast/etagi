@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ManagersController implements the CRUD actions for Managers model.
  */
-class ManagersController extends Controller
+class ManagersController extends DefaultController
 {
     public function behaviors()
     {

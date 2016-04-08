@@ -41,4 +41,9 @@ class ServiceCategories extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+
+    public function getServices()
+    {
+        return $this->hasMany(Services::className(), ['category_id' => 'id']);
+    }
 }

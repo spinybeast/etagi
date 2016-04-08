@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Carousel;
-
+sersid\owlcarousel\Asset::register($this);
 $this->title = $model->title;
 ?>
 <div class="container exclusive">
@@ -45,7 +45,6 @@ $this->title = $model->title;
         </div>
         <div class="col-md-5">
             <p class="phone"><b>Телефон:</b> <?= $model->phone ?></p>
-            <a href="#">
                 <?php
                 echo newerton\fancybox\FancyBox::widget([
                     'target' => 'a[rel=fancybox' . $model->id . ']',
@@ -75,19 +74,24 @@ $this->title = $model->title;
                     ]
                 ]);
                 $images = $model->getImages();
-                $img = [];
+                echo Html::beginTag('div', ['class' => 'carousel']);
                 foreach ($images as $image) {
-                    $img[] = Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $model->id]);
+                    echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $model->id]);
                 }
-                echo Carousel::widget([
-                    'items' => $img,
-                    'options' => [
-                        'class' => 'slide',
-                    ]
-                ]); ?>
-            </a>
+                echo Html::endTag('div');
+                ?>
 
             <p class="text-right price"><?= number_format($model->price, 0, ' ', ' ') ?> руб.</p>
         </div>
     </div>
 </div>
+<?php $this->registerJs('
+    $(".carousel").owlCarousel({
+        items: 1,
+        loop: true,
+        animateOut: \'fadeOut\',
+        autoplay: true,
+        autoplayTimeout: 2500,
+        autoplayHoverPause: true
+    });
+'); ?>

@@ -341,17 +341,24 @@ i, em {
 -----------------------------------------------------------------------------*/
 
 .services {
-    min-height: 474px;
-
     position: relative;
 }
+.services.well {
 
+    min-height: 20px;
+    padding: 25px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+     border: none;
+     border-radius: 0;
+     box-shadow: none;
+
+}
 .services_bg {
-    height: 474px;
 }
 
 .services_bg img {
-    max-height: 100%;
+    max-height: 500px;
     margin: 0 auto;
 }
 

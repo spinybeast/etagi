@@ -6,36 +6,59 @@ use Yii;
 use app\models\Exclusives;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
+use yii\data\Pagination;
 
 class ExclusivesController extends Controller
 {
 
     public function actionIndex()
     {
+        Yii::$app->session->removeFlash('activeButton');
+        $query = Exclusives::find();
+        list($pages, $exclusives) = $this->findModels($query);
+
         return $this->render('index', [
-            'exclusives' => Exclusives::find()->all()
+            'exclusives' => $exclusives,
+            'pages' => $pages,
         ]);
     }
 
     public function actionHouse()
     {
+        Yii::$app->session->setFlash('activeButton', 'house');
+        $query = Exclusives::find()->where(['type' => Exclusives::HOUSE]);
+        list($pages, $exclusives) = $this->findModels($query);
+
         return $this->render('index', [
-            'exclusives' => Exclusives::findAll(['type' => Exclusives::HOUSE])
+            'exclusives' => $exclusives,
+            'pages' => $pages,
+
         ]);
     }
 
     public function actionFlat()
     {
+        Yii::$app->session->setFlash('activeButton', 'flat');
+        $query = Exclusives::find()->where(['type' => Exclusives::FLAT]);
+        list($pages, $exclusives) = $this->findModels($query);
+
         return $this->render('index', [
-            'exclusives' => Exclusives::findAll(['type' => Exclusives::FLAT])
+            'exclusives' => $exclusives,
+            'pages' => $pages,
+
         ]);
     }
 
     public function actionRooms($count)
     {
+        Yii::$app->session->setFlash('activeButton', 'rooms' . $count);
+        $query = Exclusives::find()->where(['rooms' => $count]);
+        list($pages, $exclusives) = $this->findModels($query);
+
         return $this->render('index', [
-            'exclusives' => Exclusives::findAll(['rooms' => $count])
+            'exclusives' => $exclusives,
+            'pages' => $pages,
+
         ]);
     }
 
@@ -60,6 +83,20 @@ class ExclusivesController extends Controller
         } else {
             throw new NotFoundHttpException('Запрошенная страница не найдена.');
         }
+    }
+
+    /**
+     * @param $query
+     * @return array
+     */
+    private function findModels($query)
+    {
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
+        $exclusives = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        return array($pages, $exclusives);
     }
 
 }
