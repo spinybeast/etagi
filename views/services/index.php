@@ -35,7 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 $items[] = [
                     'label' => Html::tag('span', FA::icon('minus-square'), ['class' => 'plus']) . ' ' . $category->name,
                     'url' => '#',
-                    'items' => $services
+                    'items' => $services,
+                    'options' => [
+                        'onclick' => 'toggleServices(this)'
+                    ]
                 ];
                 echo Html::beginTag('div', ['class' => 'services well']);
                 echo yii\widgets\Menu::widget(['items' => $items, 'encodeLabels' => false]);
@@ -48,9 +51,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php } ?>
     </div>
     <p>
-        <br/><br/>
-
     </p>
 
 </div>
 
+<script>
+    function toggleServices(element) {
+        var icon = $(element).find("span");
+        var html = icon.html();
+        icon.html(html == '<?= FA::icon('minus-square') ?>' ? '<?= FA::icon('plus-square') ?>' : '<?= FA::icon('minus-square') ?>');
+        $(element).find("ul").slideToggle();
+    }
+</script>

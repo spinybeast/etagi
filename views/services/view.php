@@ -3,43 +3,25 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $categories app\models\ServiceCategories[] */
+/* @var $model app\models\Services */
 
-$this->title = 'Услуги';
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Услуги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container reviews-index">
-
+<div class="container service-view">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header text-center">
                 <?= Html::encode($this->title) ?><br/>
-                <small>Мы предоставляем для клиентов.</small>
             </h1>
         </div>
     </div>
 
     <div class="etagi-services">
 
-        <?php if (!empty($categories)) {
-            $items = [];
-            foreach ($categories as $category) {
-                echo Html::beginTag('div', ['class' => 'well']);
-                $services = [];
-                foreach ($category->services as $service) {
-                    $services[] = [
-                        'label' => $service->title,
-                        'url' => ['view', 'id' => $service->id]
-                    ];
-                }
-                $items[] = [
-                    'label' => $category->name,
-                    'url' => '#',
-                    'items' => $services
-                ];
-            }
-            echo yii\widgets\Menu::widget(['items' => $items]);
-            echo Html::endTag('div');
+        <?php if (!empty($model)) {
+            echo Html::tag('div', $model->text, ['class' => 'text']);
         } else { ?>
             <div class="text-center">
                 Страница находится на оформлении
@@ -48,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <p>
         <br/><br/>
-
     </p>
 
 </div>

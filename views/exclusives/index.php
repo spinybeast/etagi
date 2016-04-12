@@ -8,13 +8,20 @@ use yii\widgets\Pjax;
 use \app\models\Exclusives;
 sersid\owlcarousel\Asset::register($this);
 
-$this->title = 'Эксклюзивные квартиры';
+$this->title = 'Эксклюзивные предложения';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .owl-theme .owl-controls {
+        bottom: 50%;
+        margin-bottom: -20px;
+    }
+</style>
     <div class="container exclusives">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header text-center">
-                    <?= Html::encode($this->title) ?><br/>
+                    Эксклюзивные квартиры<br/>
                     <small>Только в нашей компании.</small>
                 </h1>
             </div>
@@ -59,39 +66,43 @@ $this->title = 'Эксклюзивные квартиры';
                         <div class="exclusives-item">
                             <div class="img">
                                 <?php
-                                echo newerton\fancybox\FancyBox::widget([
-                                    'target' => 'a[rel=fancybox' . $item->id . ']',
-                                    'helpers' => true,
-                                    'mouse' => true,
-                                    'config' => [
-                                        'maxWidth' => '100%',
-                                        'maxHeight' => '100%',
-                                        'playSpeed' => 3000,
-                                        'padding' => 0,
-                                        'fitToView' => true,
-                                        'width' => '100%',
-                                        'height' => '100%',
-                                        'closeEffect' => 'elastic',
-                                        'prevEffect' => 'elastic',
-                                        'nextEffect' => 'elastic',
-                                        'closeBtn' => false,
-                                        'openOpacity' => true,
-                                        'helpers' => [
-                                            'buttons' => [],
-                                            'overlay' => [
-                                                'css' => [
-                                                    'background' => 'rgba(0, 0, 0, 0.8)'
-                                                ]
-                                            ]
-                                        ],
-                                    ]
-                                ]);
                                 $images = $item->getImages();
-                                echo Html::beginTag('div', ['class' => 'carousel']);
-                                foreach ($images as $image) {
-                                    echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
+                                if (count($images) > 1) {
+                                    echo newerton\fancybox\FancyBox::widget([
+                                        'target' => 'a[rel=fancybox' . $item->id . ']',
+                                        'helpers' => true,
+                                        'mouse' => true,
+                                        'config' => [
+                                            'maxWidth' => '100%',
+                                            'maxHeight' => '100%',
+                                            'playSpeed' => 3000,
+                                            'padding' => 0,
+                                            'fitToView' => true,
+                                            'width' => '100%',
+                                            'height' => '100%',
+                                            'closeEffect' => 'elastic',
+                                            'prevEffect' => 'elastic',
+                                            'nextEffect' => 'elastic',
+                                            'closeBtn' => false,
+                                            'openOpacity' => true,
+                                            'helpers' => [
+                                                'buttons' => [],
+                                                'overlay' => [
+                                                    'css' => [
+                                                        'background' => 'rgba(0, 0, 0, 0.8)'
+                                                    ]
+                                                ]
+                                            ],
+                                        ]
+                                    ]);
+                                    echo Html::beginTag('div', ['class' => 'carousel']);
+                                    foreach ($images as $image) {
+                                        echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
+                                    }
+                                    echo Html::endTag('div');
+                                } else {
+                                    echo Html::img(current($images), ['class' => 'img-responsive']);
                                 }
-                                echo Html::endTag('div');
                                 ?>
                             </div>
                             <div class="col-md-12">
@@ -124,13 +135,17 @@ $this->title = 'Эксклюзивные квартиры';
             </div>
     </div>
 
-<?php $this->registerJs("$(function(){
-    $('.carousel').owlCarousel({
+<?php $this->registerJs("
+$(document).on('ready pjax:success', function(){
+    jQuery('.carousel').owlCarousel({
         items: 1,
         loop: true,
+        nav: true,
+        dots: false,
+        navText: ['<', '>']
     });
-    $(document)
+    $.fancybox.init();
+    jQuery(document)
       .on('pjax:start', function() { $('#exclusive-items').fadeOut(12000); })
       .on('pjax:end', function() { $('#exclusive-items').fadeIn(12000); });
-  });"
-); ?>
+});"); ?>

@@ -7,6 +7,9 @@ use yii\helpers\Url;
 use yii\bootstrap\Carousel;
 sersid\owlcarousel\Asset::register($this);
 $this->title = $model->title;
+
+$this->params['breadcrumbs'][] = ['label' => 'Эксклюзивные предложения', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container exclusive">
     <div class="row">
@@ -90,6 +93,7 @@ $this->title = $model->title;
         items: 1,
         loop: true,
         animateOut: \'fadeOut\',
+        autoHeight:true,
         autoplay: true,
         autoplayTimeout: 2500,
         autoplayHoverPause: true

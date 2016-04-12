@@ -2,7 +2,14 @@ html,
 body {
     height: 100%;
 }
-
+a:hover, a:focus {
+    color: #000000;
+    text-decoration: none;
+}
+a {
+    color: #03275F;
+    text-decoration: underline;
+}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -163,15 +170,6 @@ body {
 
     margin: 0 auto;
     position: relative;
-}
-
-a {
-    color: #004bbc;
-    text-decoration: underline;
-}
-
-a:hover {
-    text-decoration: none;
 }
 
 strong, b {
@@ -354,6 +352,14 @@ i, em {
      box-shadow: none;
 
 }
+
+.services li ul {
+    margin-left: 16px;
+}
+.services li ul li{
+    list-style: square;
+    margin-left: 20px;
+}
 .services_bg {
 }
 
@@ -433,7 +439,11 @@ i, em {
     text-shadow: 0 0 1px #fff;
     z-index: 2
 }
-
+.service-view .text{
+}
+.service-view .text p{
+    padding: 5px 0;
+}
 /* main_form
 -----------------------------------------------------------------------------*/
 .help-block {
@@ -1002,6 +1012,28 @@ i, em {
     top: 45px;
 }
 
+.owl-theme .owl-dots .owl-dot span {
+    background: #8B231D;
+}
+
+.owl-theme .owl-controls .owl-nav [class*=owl-]:hover {
+    background: #fff;
+    color: #000;
+}
+.owl-theme .owl-controls .owl-nav [class*=owl-] {
+    font-size: 15px;
+    font-weight: bold;
+    background: none;
+    position: absolute;
+}
+.owl-theme .owl-controls .owl-prev {
+    left: 0;
+    bottom: 0;
+}
+.owl-theme .owl-controls .owl-next {
+    right: 0;
+    bottom: 0;
+}
 
 @media (min-width: 768px) {
     .navbar .navbar-nav {
