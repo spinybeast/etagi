@@ -44,7 +44,7 @@ class Reviews extends \yii\db\ActiveRecord
             'id' => 'ID',
             'author' => 'Ваше имя',
             'text' => 'Ваш отзыв',
-            'published' => 'Published',
+            'published' => 'Опубликован',
         ];
     }
 }

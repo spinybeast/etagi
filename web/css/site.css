@@ -1034,7 +1034,10 @@ i, em {
     right: 0;
     bottom: 0;
 }
-
+.breadcrumb {
+    padding: 15px;
+    background: none;
+}
 @media (min-width: 768px) {
     .navbar .navbar-nav {
         display: inline-block;

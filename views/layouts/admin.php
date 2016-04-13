@@ -40,6 +40,7 @@ AdminAsset::register($this);
                 ['label' => FA::icon('users') . ' Менеджеры', 'url' => ['/admin/managers/index']],
                 ['label' => FA::icon('file-image-o') . ' Баннеры', 'url' => ['/admin/banners/index']],
                 ['label' => FA::icon('wrench') . ' Услуги', 'url' => ['/admin/services/index']],
+                ['label' => FA::icon('star') . ' Отзывы', 'url' => ['/admin/reviews/index']],
                 ['label' => FA::icon('sign-out') . ' Выход', 'url' => ['/admin/default/logout'], 'visible' => !Yii::$app->user->isGuest],
             ],
         ]);

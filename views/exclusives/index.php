@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]);
                                     echo Html::beginTag('div', ['class' => 'carousel']);
                                     foreach ($images as $image) {
-                                        echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id]);
+                                        echo Html::a(Html::img($image, ['class' => 'img-responsive']), $image, ['rel' => 'fancybox' . $item->id, 'data-pjax' => 0]);
                                     }
                                     echo Html::endTag('div');
                                 } else {
@@ -144,7 +144,6 @@ $(document).on('ready pjax:success', function(){
         dots: false,
         navText: ['<', '>']
     });
-    $.fancybox.init();
     jQuery(document)
       .on('pjax:start', function() { $('#exclusive-items').fadeOut(12000); })
       .on('pjax:end', function() { $('#exclusive-items').fadeIn(12000); });

@@ -1,10 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Reviews;
-use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -15,13 +14,16 @@ use yii\filters\VerbFilter;
  */
 class ReviewsController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -30,38 +32,36 @@ class ReviewsController extends Controller
     /**
      * Lists all Reviews models.
      * @return mixed
-     * @throws InvalidParamException
      */
     public function actionIndex()
     {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Reviews::find(),
+        ]);
+
         return $this->render('index', [
-            'reviews' => Reviews::findAll(['published' => 1]),
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new Reviews model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Displays a single Reviews model.
+     * @param integer $id
      * @return mixed
      */
-    public function actionCreate()
+    public function actionView($id)
     {
-        $model = new Reviews();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Спасибо за Ваш отзыв!');
-        } else {
-            Yii::$app->session->setFlash('danger', 'Не удалось сохранить отзыв. Если ошибка повторится, свяжитесь с нами.');
-        }
-        return $this->redirect(['index']);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
+
 
     /**
      * Updates an existing Reviews model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
-     * @throws InvalidParamException
      */
     public function actionUpdate($id)
     {

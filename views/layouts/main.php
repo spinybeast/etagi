@@ -77,8 +77,9 @@ AppAsset::register($this);
         ?>
     </header>
     <main class="content">
-        <?php if(isset($this->params['breadcrumbs'])){
+        <?php if(isset($this->params['breadcrumbs'])) {
             echo \yii\widgets\Breadcrumbs::widget([
+                'options' => ['class' => 'breadcrumb container'],
                 'homeLink' => [
                     'label' => 'Главная',
                     'url' => Yii::$app->homeUrl
